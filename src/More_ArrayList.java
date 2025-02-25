@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
 
 public class More_ArrayList {
@@ -13,6 +12,7 @@ public class More_ArrayList {
             printActions();
             switch(Integer.parseInt(sc.nextLine())){
                 case 1 -> addItems(groceries);
+                case 2 -> removeItems(groceries);
                 default -> flag = false;
             }
             groceries.sort(Comparator.naturalOrder());
@@ -22,7 +22,20 @@ public class More_ArrayList {
     private static void addItems(ArrayList<String> groceries){
         System.out.println("Add item(s) [separated items by commas]:");
         String[] items = sc.nextLine().split(",");
-        groceries.addAll(List.of(items));
+        for (String i : items){
+            String trimmed = i.trim();
+            if (groceries.indexOf(trimmed) < 0){
+                groceries.add(trimmed);
+            }
+        }
+    }
+    private static void removeItems(ArrayList<String> groceries){
+        System.out.println("Remove item(s) [separated items by comma]:");
+        String[] items = sc.nextLine().split(",");
+        for (String i : items){
+            String trimmed = i.trim();
+            groceries.remove(trimmed);
+        }
     }
     private static void printActions(){
         String textBlock = """
